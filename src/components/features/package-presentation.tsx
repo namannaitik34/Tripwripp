@@ -24,9 +24,10 @@ export function PackagePresentation() {
             <CardHeader className="p-0">
               <div className="aspect-[16/9] relative w-full">
                 <Image 
-                  src={pkg.image} 
+                  src="https://i.ibb.co/prwQMX24/IMG-0153.jpg" alt="Destination Image"
                   alt={pkg.name} 
-                  layout="fill" 
+                  width={700}
+                  height={300}
                   objectFit="cover"
                   data-ai-hint={pkg.imageHint}
                 />
@@ -66,7 +67,7 @@ export function PackagePresentation() {
               </div>
             </CardContent>
             <CardFooter className="p-6 pt-0">
-              <Button className="w-full" variant="default">
+              <Button className="w-full" variant="cta">
                 View Details
               </Button>
             </CardFooter>

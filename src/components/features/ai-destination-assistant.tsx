@@ -31,6 +31,7 @@ import type { SuggestDestinationsOutput } from "@/ai/flows/suggest-destinations"
 const aiAssistantFormSchema = z.object({
   interests: z.string().min(3, { message: "Please describe your interests (min 3 characters)." }),
   travelStyle: z.string({ required_error: "Please select your travel style." }),
+  country: z.string().optional(),
   budget: z.string({ required_error: "Please select your budget." }),
 });
 
@@ -48,6 +49,9 @@ export function AiDestinationAssistant() {
     resolver: zodResolver(aiAssistantFormSchema),
     defaultValues: {
       interests: "",
+      country: "",
+      travelStyle: "",
+      budget: "",
     },
   });
 
@@ -112,11 +116,25 @@ export function AiDestinationAssistant() {
 
               <FormField
                 control={form.control}
+                name="country"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Specific Country (Optional)</FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g., Italy, Japan" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
                 name="travelStyle"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Preferred Travel Style</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select your travel style" />
@@ -139,11 +157,11 @@ export function AiDestinationAssistant() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Budget</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select your budget range" />
-                        </SelectTrigger>
+                        </Trigger>
                       </FormControl>
                       <SelectContent>
                         {budgets.map(budget => (
@@ -155,7 +173,7 @@ export function AiDestinationAssistant() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button type="submit" className="w-full" disabled={isLoading} variant="cta">
                 {isLoading ? (
                   <>
                     <Sparkles className="mr-2 h-4 w-4 animate-spin" />

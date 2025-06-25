@@ -9,7 +9,6 @@ import { Briefcase, Compass, Sparkles, Users } from 'lucide-react';
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <Header />
       <main className="flex-grow container mx-auto p-4 py-8 md:p-8">
         <Tabs defaultValue="destinations" className="w-full">
           <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8 h-auto">

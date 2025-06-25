@@ -23,12 +23,13 @@ export function DestinationShowcase() {
           <Card key={destination.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300 ease-in-out">
             <CardHeader className="p-0">
               <div className="aspect-[3/2] relative w-full">
-                <Image 
-                  src={destination.image} 
-                  alt={destination.name} 
-                  layout="fill" 
+                <Image
+                  src="https://i.ibb.co/prwQMX24/IMG-0153.jpg"
+                  alt={destination.name}
+                  width={500}
+                  height={500}
                   objectFit="cover"
-                  data-ai-hint={destination.imageHint} 
+                  data-ai-hint={destination.imageHint}
                 />
               </div>
             </CardHeader>
