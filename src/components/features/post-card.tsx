@@ -17,11 +17,12 @@ interface PostCardProps {
 
 export function PostCard({ post }: PostCardProps) {
   const { user } = useAuth();
+  const isMockPost = post.id.startsWith('mock-');
   
   const [optimisticPost, setOptimisticPost] = useOptimistic(
     post,
     (state, _) => {
-      if (!user) return state;
+      if (!user || isMockPost) return state;
       const alreadyLiked = state.likedBy.includes(user.uid);
       return {
         ...state,
@@ -34,7 +35,7 @@ export function PostCard({ post }: PostCardProps) {
   );
 
   const handleLikeClick = async () => {
-    if (!user) return;
+    if (!user || isMockPost) return;
     startTransition(() => {
         setOptimisticPost(null);
     });
@@ -61,7 +62,7 @@ export function PostCard({ post }: PostCardProps) {
       </CardHeader>
       <CardContent className="p-0">
         <div className="relative w-full aspect-[4/3]">
-          <Image src={optimisticPost.imageUrl} alt={optimisticPost.title} fill style={{ objectFit: 'cover' }} data-ai-hint="travel adventure" />
+          <Image src={optimisticPost.imageUrl} alt={optimisticPost.title} fill style={{ objectFit: 'cover' }} data-ai-hint={optimisticPost.imageHint || "travel adventure"} />
         </div>
         <div className="p-6">
           <h3 className="text-xl font-bold mb-2 font-headline">{optimisticPost.title}</h3>
@@ -78,7 +79,7 @@ export function PostCard({ post }: PostCardProps) {
                 variant="ghost"
                 size="icon"
                 onClick={handleLikeClick}
-                disabled={!user}
+                disabled={!user || isMockPost}
                 className="group"
             >
                 <Heart className={`h-5 w-5 transition-all ${isLiked ? 'text-red-500 fill-red-500' : 'text-gray-500 group-hover:text-red-400'}`} />

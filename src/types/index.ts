@@ -29,13 +29,14 @@ export interface TravelBuddyProfile {
 }
 
 export interface Post {
-  id: string;
+  id:string;
   userId: string;
   username: string;
   userAvatar: string;
   title: string;
   location: string;
   imageUrl: string;
+  imageHint?: string;
   story: string;
   timestamp: any; // Firestore timestamp
   likes: number;

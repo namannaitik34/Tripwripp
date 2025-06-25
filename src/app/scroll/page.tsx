@@ -2,46 +2,66 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import type { Post } from '@/types';
-import { getPosts } from '@/app/actions';
+import { getPosts, getMockPosts } from '@/app/actions';
 import { PostCard } from '@/components/features/post-card';
 import { AddPostDialog } from '@/components/features/add-post-dialog';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useAuth } from '@/hooks/use-auth';
 
 export default function ScrollPage() {
+  const { isFirebaseConfigured } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
   const [lastVisible, setLastVisible] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [isUsingMockData, setIsUsingMockData] = useState(false);
 
   const fetchInitialPosts = useCallback(async () => {
     setLoading(true);
-    const result = await getPosts(null);
-    if (result.success && result.posts) {
+    let result;
+
+    if (!isFirebaseConfigured) {
+        setIsUsingMockData(true);
+        result = await getMockPosts(null);
+    } else {
+        result = await getPosts(null);
+        if (result.success && result.posts?.length === 0) {
+            setIsUsingMockData(true);
+            result = await getMockPosts(null);
+        }
+    }
+
+    if (result?.success && result.posts) {
       setPosts(result.posts);
       setLastVisible(result.lastVisible);
-      if (!result.lastVisible || result.posts.length < 5) {
-        setHasMore(false);
-      }
+      setHasMore(!!result.lastVisible);
+    } else {
+      setHasMore(false);
     }
     setLoading(false);
-  }, []);
+  }, [isFirebaseConfigured]);
 
   const fetchMorePosts = async () => {
-    if (!lastVisible) {
+    if (loadingMore || !hasMore || !lastVisible) {
         setHasMore(false);
         return;
     }
     setLoadingMore(true);
-    const result = await getPosts(lastVisible);
-    if (result.success && result.posts) {
+
+    const fetchFunction = isUsingMockData ? getMockPosts : getPosts;
+    const result = await fetchFunction(lastVisible);
+    
+    if (result.success && result.posts && result.posts.length > 0) {
         setPosts(prev => [...prev, ...result.posts!]);
         setLastVisible(result.lastVisible);
-        if (!result.lastVisible || result.posts.length < 5) {
+        if (!result.lastVisible) {
             setHasMore(false);
         }
+    } else {
+        setHasMore(false);
     }
     setLoadingMore(false);
   }
