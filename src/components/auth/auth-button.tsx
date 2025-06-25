@@ -16,7 +16,7 @@ import {
 import { LogIn, LogOut } from 'lucide-react';
 
 export function AuthButton() {
-  const { user, loading } = useAuth();
+  const { user, loading, isFirebaseConfigured } = useAuth();
 
   const handleSignIn = async () => {
     const provider = new GoogleAuthProvider();
@@ -34,6 +34,15 @@ export function AuthButton() {
       console.error('Error signing out', error);
     }
   };
+
+  if (!isFirebaseConfigured) {
+    return (
+        <Button variant="outline" size="sm" disabled title="Firebase is not configured">
+            <LogIn className="mr-2 h-4 w-4" />
+            Login
+        </Button>
+    );
+  }
 
   if (loading) {
     return <Button variant="outline" size="sm" disabled>Loading...</Button>;

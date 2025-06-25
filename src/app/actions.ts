@@ -16,7 +16,7 @@ import {
   runTransaction,
 } from 'firebase/firestore';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
-import { db, storage } from '@/lib/firebase';
+import { db, storage, isConfigured } from '@/lib/firebase';
 import type { Post } from '@/types';
 import { revalidatePath } from 'next/cache';
 
@@ -41,6 +41,10 @@ export async function handleSuggestDestinations(input: SuggestDestinationsInput)
 }
 
 export async function getPosts(lastVisible: string | null = null) {
+  if (!isConfigured) {
+    return { success: true, posts: [], lastVisible: null };
+  }
+
   try {
     const postsRef = collection(db, 'posts');
     let q;
@@ -77,6 +81,10 @@ interface AddPostInput {
 }
 
 export async function addPost(data: AddPostInput) {
+  if (!isConfigured) {
+    return { success: false, error: 'Firebase is not configured. Please add your credentials to the .env file.' };
+  }
+
   try {
     const imageRef = ref(storage, `posts/${data.userId}/${Date.now()}`);
     await uploadString(imageRef, data.imageDataUrl, 'data_url');
@@ -104,6 +112,10 @@ export async function addPost(data: AddPostInput) {
 }
 
 export async function toggleLike(postId: string, userId: string) {
+  if (!isConfigured) {
+    return { success: false, error: 'Firebase is not configured. Please add your credentials to the .env file.' };
+  }
+  
   try {
     const postRef = doc(db, 'posts', postId);
     await runTransaction(db, async (transaction) => {

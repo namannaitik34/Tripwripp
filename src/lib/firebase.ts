@@ -1,7 +1,7 @@
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
+import { getAuth, type Auth } from "firebase/auth";
+import { getFirestore, type Firestore } from "firebase/firestore";
+import { getStorage, type FirebaseStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,10 +12,33 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Initialize Firebase
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
+let app: FirebaseApp;
+let auth: Auth;
+let db: Firestore;
+let storage: FirebaseStorage;
+
+// We check if the config is valid and not using placeholder values.
+export const isConfigured = 
+  firebaseConfig.apiKey && 
+  firebaseConfig.apiKey !== "PASTE_YOUR_API_KEY_HERE" && 
+  !!firebaseConfig.projectId;
+
+if (isConfigured) {
+  // If the config is valid, initialize Firebase as usual.
+  app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+  auth = getAuth(app);
+  db = getFirestore(app);
+  storage = getStorage(app);
+} else {
+  // If not configured, we provide dummy objects to prevent app from crashing.
+  // The app will not have Firebase functionality but will be able to render.
+  if (typeof window !== 'undefined') {
+    console.warn("Firebase is not configured. App is running in a limited mode. Please provide Firebase credentials in the .env file for full functionality.");
+  }
+  app = {} as FirebaseApp;
+  auth = {} as Auth;
+  db = {} as Firestore;
+  storage = {} as FirebaseStorage;
+}
 
 export { app, auth, db, storage };
