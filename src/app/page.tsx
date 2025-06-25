@@ -26,11 +26,11 @@ export default function Home() {
             <TabsTrigger value="ai_assistant" className="py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg flex items-center gap-2">
               <Sparkles className="h-5 w-5" /> AI Assistant
             </TabsTrigger>
-            <Link href="/scroll" legacyBehavior passHref>
-              <TabsTrigger value="scroll" className="py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg flex items-center gap-2">
+            <TabsTrigger value="scroll" asChild className="py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg flex items-center gap-2">
+              <Link href="/scroll">
                 <Newspaper className="h-5 w-5" /> Scroll
-              </TabsTrigger>
-            </Link>
+              </Link>
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="destinations" className="rounded-lg shadow-sm">
