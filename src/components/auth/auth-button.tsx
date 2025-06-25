@@ -26,10 +26,27 @@ export function AuthButton() {
       await signInWithPopup(auth, provider);
     } catch (error) {
       console.error('Error signing in with Google', error);
+      let description = 'An unexpected error occurred during sign-in.';
+       if (error instanceof Error && 'code' in error) {
+        const firebaseError = error as { code: string; message: string };
+        switch (firebaseError.code) {
+          case 'auth/popup-closed-by-user':
+            description = 'The sign-in popup was closed. Please try again.';
+            break;
+          case 'auth/cancelled-popup-request':
+            description = 'The sign-in was cancelled.';
+            break;
+          case 'auth/operation-not-allowed':
+             description = 'Sign-in with Google is not enabled. Please enable it in your Firebase project settings under Authentication > Sign-in method.';
+             break;
+          default:
+            description = `Error: ${firebaseError.message} (${firebaseError.code})`;
+        }
+      }
       toast({
         variant: 'destructive',
         title: 'Sign-in Failed',
-        description: 'Could not sign in. Please ensure Firebase is configured correctly and Google Sign-in is enabled in your Firebase project.',
+        description,
       });
     }
   };
@@ -39,10 +56,14 @@ export function AuthButton() {
       await signOut(auth);
     } catch (error) {
       console.error('Error signing out', error);
+      let description = 'An unexpected error occurred during sign-out.';
+       if (error instanceof Error) {
+         description = error.message;
+       }
       toast({
         variant: 'destructive',
         title: 'Sign-out Failed',
-        description: 'An error occurred while signing out.',
+        description,
       });
     }
   };

@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useContext, createContext, ReactNode } from 'react';
 import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
 import { auth, isConfigured } from '@/lib/firebase';
-import { Skeleton } from '@/components/ui/skeleton';
 
 export interface AuthContextType {
   user: FirebaseUser | null;
@@ -31,14 +30,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     return () => unsubscribe();
   }, []);
-
-  if (loading) {
-      return (
-          <div className="w-full h-screen flex items-center justify-center">
-              <Skeleton className="w-24 h-24 rounded-lg" />
-          </div>
-      )
-  }
 
   return <AuthContext.Provider value={{ user, loading, isFirebaseConfigured: isConfigured }}>{children}</AuthContext.Provider>;
 };
