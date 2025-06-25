@@ -161,7 +161,7 @@ export function AiDestinationAssistant() {
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select your budget range" />
-                        </Trigger>
+                        </SelectTrigger>
                       </FormControl>
                       <SelectContent>
                         {budgets.map(budget => (
