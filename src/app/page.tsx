@@ -1,4 +1,7 @@
-import { Header } from '@/components/layout/header';
+'use client';
+
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { Suspense, useEffect, useState, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DestinationShowcase } from '@/components/features/destination-showcase';
 import { PackagePresentation } from '@/components/features/package-presentation';
@@ -7,12 +10,32 @@ import { AiDestinationAssistant } from '@/components/features/ai-destination-ass
 import { Briefcase, Compass, Sparkles, Users, Newspaper } from 'lucide-react';
 import Link from 'next/link';
 
+function HomePageContent() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [activeTab, setActiveTab] = useState('destinations');
 
-export default function Home() {
+  useEffect(() => {
+    const tab = searchParams.get('tab');
+    const validTabs = ['destinations', 'packages', 'buddy_finder', 'ai_assistant'];
+    if (tab && validTabs.includes(tab)) {
+      setActiveTab(tab);
+    } else {
+      setActiveTab('destinations');
+    }
+  }, [searchParams]);
+
+  const handleTabChange = useCallback((value: string) => {
+    setActiveTab(value);
+    router.push(`${pathname}?tab=${value}`, { scroll: false });
+  }, [router, pathname]);
+
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <main className="flex-grow container mx-auto p-4 py-8 md:p-8">
-        <Tabs defaultValue="destinations" className="w-full">
+        <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
           <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 mb-8 h-auto">
             <TabsTrigger value="destinations" className="py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg flex items-center gap-2">
               <Compass className="h-5 w-5" /> Destinations
@@ -52,4 +75,12 @@ export default function Home() {
       </footer>
     </div>
   );
+}
+
+export default function Home() {
+    return (
+        <Suspense> 
+            <HomePageContent />
+        </Suspense>
+    )
 }
