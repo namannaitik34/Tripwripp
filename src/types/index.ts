@@ -27,3 +27,17 @@ export interface TravelBuddyProfile {
   avatar: string;
   avatarHint: string;
 }
+
+export interface Post {
+  id: string;
+  userId: string;
+  username: string;
+  userAvatar: string;
+  title: string;
+  location: string;
+  imageUrl: string;
+  story: string;
+  timestamp: any; // Firestore timestamp
+  likes: number;
+  likedBy: string[];
+}

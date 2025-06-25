@@ -4,14 +4,16 @@ import { DestinationShowcase } from '@/components/features/destination-showcase'
 import { PackagePresentation } from '@/components/features/package-presentation';
 import { TravelBuddyFinder } from '@/components/features/travel-buddy-finder';
 import { AiDestinationAssistant } from '@/components/features/ai-destination-assistant';
-import { Briefcase, Compass, Sparkles, Users } from 'lucide-react';
+import { Briefcase, Compass, Sparkles, Users, Newspaper } from 'lucide-react';
+import Link from 'next/link';
+
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <main className="flex-grow container mx-auto p-4 py-8 md:p-8">
         <Tabs defaultValue="destinations" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8 h-auto">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 mb-8 h-auto">
             <TabsTrigger value="destinations" className="py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg flex items-center gap-2">
               <Compass className="h-5 w-5" /> Destinations
             </TabsTrigger>
@@ -24,6 +26,11 @@ export default function Home() {
             <TabsTrigger value="ai_assistant" className="py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg flex items-center gap-2">
               <Sparkles className="h-5 w-5" /> AI Assistant
             </TabsTrigger>
+            <Link href="/scroll" legacyBehavior passHref>
+              <TabsTrigger value="scroll" className="py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg flex items-center gap-2">
+                <Newspaper className="h-5 w-5" /> Scroll
+              </TabsTrigger>
+            </Link>
           </TabsList>
 
           <TabsContent value="destinations" className="rounded-lg shadow-sm">
