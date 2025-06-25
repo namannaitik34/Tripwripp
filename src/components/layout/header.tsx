@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { AuthButton } from '@/components/auth/auth-button';
 import { Button } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 export function Header() {
   const navLinks = [
@@ -42,6 +42,12 @@ export function Header() {
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-[250px] bg-navy text-white p-6">
+                  <SheetHeader>
+                    <SheetTitle className="sr-only">Menu</SheetTitle>
+                    <SheetDescription className="sr-only">
+                      Main navigation links
+                    </SheetDescription>
+                  </SheetHeader>
                   <nav className="flex flex-col gap-6 mt-8">
                     {navLinks.map(link => (
                       <Link key={link.label} href={link.href} className="text-lg hover:text-orange-400 transition-colors" scroll={false}>
