@@ -38,7 +38,7 @@ export interface Post {
   imageUrl: string;
   imageHint?: string;
   story: string;
-  timestamp: any; // Firestore timestamp
+  timestamp: string; // Serialized ISO 8601 string
   likes: number;
   likedBy: string[];
 }

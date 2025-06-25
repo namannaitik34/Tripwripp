@@ -55,7 +55,7 @@ export function PostCard({ post }: PostCardProps) {
           <div>
             <p className="text-sm font-semibold">{optimisticPost.username}</p>
             <p className="text-xs text-muted-foreground">
-              {optimisticPost.timestamp ? formatDistanceToNow(optimisticPost.timestamp.toDate(), { addSuffix: true }) : 'Just now'}
+              {optimisticPost.timestamp ? formatDistanceToNow(new Date(optimisticPost.timestamp), { addSuffix: true }) : 'Just now'}
             </p>
           </div>
         </div>

@@ -53,7 +53,7 @@ const MOCK_POSTS: Post[] = [
     imageUrl: 'https://placehold.co/800x600.png',
     imageHint: 'annapurna mountains nepal',
     story: '15 days of pure bliss and pain. The views were otherworldly, and the people I met along the way were incredible. Every step was a challenge, but reaching the Thorung La Pass was a moment of pure triumph. #trekking #nepal #adventure',
-    timestamp: { toDate: () => new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) },
+    timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
     likes: 256,
     likedBy: [],
   },
@@ -67,7 +67,7 @@ const MOCK_POSTS: Post[] = [
     imageUrl: 'https://placehold.co/800x600.png',
     imageHint: 'thailand beach longtail boat',
     story: 'Spent a week island hopping, swimming in turquoise waters, and just soaking up the sun. The highlight was a private boat tour to Maya Bay at sunrise, before the crowds arrived. Unforgettable. #beachlife #thailand #travel',
-    timestamp: { toDate: () => new Date(Date.now() - 5 * 24 * 60 * 60 * 1000) },
+    timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
     likes: 489,
     likedBy: [],
   },
@@ -81,7 +81,7 @@ const MOCK_POSTS: Post[] = [
     imageUrl: 'https://placehold.co/800x600.png',
     imageHint: 'tokyo street food',
     story: 'From Michelin-starred sushi to street-side ramen, Tokyo is a food lover\'s dream. I think I gained 5 pounds in a week, and it was worth every single calorie. The Tsukiji Fish Market was an assault on the senses in the best way possible. #foodie #japan #story',
-    timestamp: { toDate: () => new Date(Date.now() - 10 * 24 * 60 * 60 * 1000) },
+    timestamp: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
     likes: 312,
     likedBy: [],
   },
@@ -95,7 +95,7 @@ const MOCK_POSTS: Post[] = [
     imageUrl: 'https://placehold.co/800x600.png',
     imageHint: 'safari giraffe tanzania',
     story: 'Waking up to the sounds of the savanna is something I\'ll never forget. We saw the Big Five in two days! The sheer scale of the landscape and the abundance of wildlife is just humbling. #safari #adventure #africa',
-    timestamp: { toDate: () => new Date(Date.now() - 15 * 24 * 60 * 60 * 1000) },
+    timestamp: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
     likes: 673,
     likedBy: [],
   },
@@ -109,7 +109,7 @@ const MOCK_POSTS: Post[] = [
     imageUrl: 'https://placehold.co/800x600.png',
     imageHint: 'machu picchu peru',
     story: 'A 4-day trek through ancient paths, cloud forests, and stunning mountain scenery. Arriving at the Sun Gate to see Machu Picchu spread out below at sunrise... words can\'t do it justice. A spiritual experience. #trekking #peru #history',
-    timestamp: { toDate: () => new Date(Date.now() - 20 * 24 * 60 * 60 * 1000) },
+    timestamp: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
     likes: 831,
     likedBy: [],
   },
@@ -123,7 +123,7 @@ const MOCK_POSTS: Post[] = [
     imageUrl: 'https://placehold.co/800x600.png',
     imageHint: 'iceland ice cave',
     story: 'Walking inside a crystal blue ice cave was like stepping into another dimension. Iceland\'s landscapes are so dramatic and raw, from the black sand beaches to the powerful waterfalls. A true land of fire and ice. #adventure #iceland #glacier',
-    timestamp: { toDate: () => new Date(Date.now() - 25 * 24 * 60 * 60 * 1000) },
+    timestamp: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString(),
     likes: 550,
     likedBy: [],
   },
@@ -137,7 +137,7 @@ const MOCK_POSTS: Post[] = [
     imageUrl: 'https://placehold.co/800x600.png',
     imageHint: 'new york skyline',
     story: 'There\'s an energy in New York that\'s addictive. From Broadway shows to quiet moments in Central Park, the city has it all. The best part? Discovering a hidden rooftop bar with a perfect view of the skyline. #citybreak #nyc #story',
-    timestamp: { toDate: () => new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) },
+    timestamp: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
     likes: 410,
     likedBy: [],
   },
@@ -179,7 +179,22 @@ export async function getPosts(lastVisible: string | null = null) {
     const querySnapshot = await getDocs(q);
     const posts: Post[] = [];
     querySnapshot.forEach((doc) => {
-      posts.push({ id: doc.id, ...doc.data() } as Post);
+      const data = doc.data();
+      const post: Post = {
+        id: doc.id,
+        userId: data.userId,
+        username: data.username,
+        userAvatar: data.userAvatar,
+        title: data.title,
+        location: data.location,
+        imageUrl: data.imageUrl,
+        imageHint: data.imageHint,
+        story: data.story,
+        timestamp: data.timestamp.toDate().toISOString(),
+        likes: data.likes,
+        likedBy: data.likedBy,
+      };
+      posts.push(post);
     });
 
     const newLastVisible = querySnapshot.docs[querySnapshot.docs.length - 1]?.id || null;
