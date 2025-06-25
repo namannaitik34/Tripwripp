@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return () => unsubscribe();
   }, []);
 
-  if (loading && isConfigured) {
+  if (loading) {
       return (
           <div className="w-full h-screen flex items-center justify-center">
               <Skeleton className="w-24 h-24 rounded-lg" />
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       )
   }
 
-  return <AuthContext.Provider value={{ user, loading, isFirebaseConfigured: isConfigured }}>{!loading && children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ user, loading, isFirebaseConfigured: isConfigured }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = (): AuthContextType => {

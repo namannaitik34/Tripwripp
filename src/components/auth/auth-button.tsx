@@ -14,9 +14,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { LogIn, LogOut } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 export function AuthButton() {
   const { user, loading, isFirebaseConfigured } = useAuth();
+  const { toast } = useToast();
 
   const handleSignIn = async () => {
     const provider = new GoogleAuthProvider();
@@ -24,6 +26,11 @@ export function AuthButton() {
       await signInWithPopup(auth, provider);
     } catch (error) {
       console.error('Error signing in with Google', error);
+      toast({
+        variant: 'destructive',
+        title: 'Sign-in Failed',
+        description: 'Could not sign in. Please ensure Firebase is configured correctly and Google Sign-in is enabled in your Firebase project.',
+      });
     }
   };
 
@@ -32,6 +39,11 @@ export function AuthButton() {
       await signOut(auth);
     } catch (error) {
       console.error('Error signing out', error);
+      toast({
+        variant: 'destructive',
+        title: 'Sign-out Failed',
+        description: 'An error occurred while signing out.',
+      });
     }
   };
 
