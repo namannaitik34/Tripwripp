@@ -9,7 +9,7 @@ body {
 @layer base {
   :root {
     --background: 207 33% 96%; /* Light Gray #F0F4F7 */
-    --navy: 220 30% 20%; /* A shade of navy */
+    --navy: 220 30% 20%; /* Standard navy blue */
     --orange: 25 85% 50%; /* A shade of orange */
     --foreground: 0 0% 3.9%;
 
@@ -58,7 +58,7 @@ body {
 
   .dark {
     --background: 0 0% 3.9%;
-    --navy: 220 30% 20%; /* A shade of navy */
+    --navy: 220 30% 20%; /* Standard navy blue */
     --orange: 25 85% 50%; /* A shade of orange */
     --foreground: 0 0% 98%;
 

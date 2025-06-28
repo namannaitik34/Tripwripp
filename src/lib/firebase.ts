@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp, type FirebaseApp } from "firebase/app";
-import { getAuth, type Auth } from "firebase/auth";
+import { getAuth, type Auth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { getFirestore, type Firestore } from "firebase/firestore";
 import { getStorage, type FirebaseStorage } from "firebase/storage";
 
@@ -42,3 +42,29 @@ if (isConfigured) {
 }
 
 export { app, auth, db, storage };
+
+const googleProvider = isConfigured ? new GoogleAuthProvider() : null;
+
+export const signInWithGoogle = async () => {
+    if (!isConfigured || !googleProvider) {
+        return { success: false, error: "Firebase not configured." };
+    }
+    try {
+        await signInWithPopup(auth, googleProvider);
+        return { success: true };
+    } catch (error: any) {
+        return { success: false, error: error.message, code: error.code };
+    }
+};
+
+export const signOutWithGoogle = async () => {
+    if (!isConfigured) {
+        return { success: false, error: "Firebase not configured." };
+    }
+    try {
+        await signOut(auth);
+        return { success: true };
+    } catch (error: any) {
+        return { success: false, error: error.message };
+    }
+};
