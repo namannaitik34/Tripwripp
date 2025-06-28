@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DestinationShowcase } from '@/components/features/destination-showcase';
 import { PackagePresentation } from '@/components/features/package-presentation';
@@ -10,12 +10,21 @@ import { AiDestinationAssistant } from '@/components/features/ai-destination-ass
 import { Plane, Users, Sparkles, Map } from 'lucide-react';
 
 function HomeContent() {
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab') || 'destinations';
+  
+  const handleTabChange = (value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('tab', value);
+    // Using push to add a new entry to the history stack
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
 
   return (
     <main className="flex-grow container mx-auto p-4 py-8">
-      <Tabs defaultValue={tab} value={tab} className="w-full">
+      <Tabs defaultValue={tab} value={tab} onValueChange={handleTabChange} className="w-full">
         <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 h-auto mb-8">
           <TabsTrigger value="destinations" className="py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg flex items-center gap-2">
             <Map className="h-5 w-5" /> Destinations

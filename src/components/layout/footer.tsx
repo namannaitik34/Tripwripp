@@ -11,17 +11,17 @@ const Footer = () => {
           <Link href="/" className="flex items-center gap-2 text-2xl font-bold mb-4">
             <img src="https://i.ibb.co/7trJccNS/58f1a629-2357-4415-a908-f7a1cadac9fe.png" alt="TripWripp-Demo Logo" className="h-10 w-auto" />
           </Link>
-          <p className="text-gray-600 text-sm mb-4">
+          <p className="text-[#ECEFF1]/80 text-sm mb-4">
             Explore the world with us. Your next adventure awaits.
           </p>
-          <p className="text-gray-600 text-sm">
+          <p className="text-[#ECEFF1]/80 text-sm">
             &copy; {new Date().getFullYear()} WanderVerse. All rights reserved.
           </p>
         </div>
 
         {/* Quick Links Section */}
         <div className="col-span-full md:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
-          <h4 className="text-lg font-semibold mb-4 text-gray-700">Quick Links</h4>
+          <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
           <ul className="space-y-2">
             <li>
               <Link href="/" className="text-[#ECEFF1] hover:text-[#FF8F00] transition-colors">
@@ -34,17 +34,17 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="/?tab=packages" className="text-gray-600 hover:text-orange-500 transition-colors" scroll={false}>
+              <Link href="/?tab=packages" className="text-[#ECEFF1] hover:text-[#FF8F00] transition-colors" scroll={false}>
                 Packages
               </Link>
             </li>
             <li>
-              <Link href="/?tab=buddy_finder" className="text-gray-600 hover:text-orange-500 transition-colors" scroll={false}>
+              <Link href="/?tab=buddy_finder" className="text-[#ECEFF1] hover:text-[#FF8F00] transition-colors" scroll={false}>
                 Travel Buddy
               </Link>
             </li>
             <li>
-              <Link href="/?tab=ai_assistant" className="text-gray-600 hover:text-orange-500 transition-colors" scroll={false}>
+              <Link href="/?tab=ai_assistant" className="text-[#ECEFF1] hover:text-[#FF8F00] transition-colors" scroll={false}>
                 AI Assistant
               </Link>
             </li>
@@ -53,7 +53,7 @@ const Footer = () => {
 
         {/* Social Media Section */}
         <div className="col-span-full md:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
-          <h4 className="text-lg font-semibold mb-4 text-gray-700">Follow Us</h4>
+          <h4 className="text-lg font-semibold mb-4 text-white">Follow Us</h4>
           <div className="flex space-x-4 text-[#ECEFF1]">
             {/* Placeholder social media icons - Replace with actual icons/components */}
             <a href="#" className="hover:text-[#FF8F00] transition-colors">
@@ -65,7 +65,7 @@ const Footer = () => {
             <a href="#" className="hover:text-[#FF8F00] transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
             </a>
-             <a href="#" className="hover:text-orange-500 transition-colors">
+             <a href="#" className="hover:text-[#FF8F00] transition-colors">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2a2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
             </a>
           </div>
@@ -73,7 +73,7 @@ const Footer = () => {
 
         {/* Contact Info Section (Added based on image) */}
         <div className="col-span-full md:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
-          <h4 className="text-lg font-semibold mb-4 text-[#ECEFF1]">Contact Us</h4>
+          <h4 className="text-lg font-semibold mb-4 text-white">Contact Us</h4>
           <div className="space-y-2 text-[#ECEFF1] text-sm">
             <p className="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> 123 Adventure Ave, Travel City</p>
             <p className="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> hello@wanderverse.com</p>
