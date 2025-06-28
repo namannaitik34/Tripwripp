@@ -28,6 +28,10 @@ interface SuggestDestinationsResult {
 }
 
 export async function handleSuggestDestinations(input: SuggestDestinationsInput): Promise<SuggestDestinationsResult> {
+  if (!process.env.GOOGLE_API_KEY || process.env.GOOGLE_API_KEY.includes('PASTE_YOUR_GOOGLE_AI_API_KEY_HERE')) {
+    return { success: false, error: "The AI Assistant is not configured. Please add your Google AI API key to the .env file." };
+  }
+  
   try {
     const result = await suggestDestinations(input);
     return { success: true, data: result };
