@@ -33,8 +33,50 @@ const HeroSection = () => {
           Discover unique destinations, find like-minded travel buddies, and plan your next unforgettable trip with TripWripp.
         </p>
         <Button asChild size="lg" variant="cta" className="mt-8 text-lg">
-          <Link href="#main-content">Start Exploring</Link>
+          <Link href="#featured-section">Start Exploring</Link>
         </Button>
+      </div>
+    </section>
+  );
+};
+
+const FeaturedSection = () => {
+  const features = [
+    {
+      icon: <Map className="h-10 w-10 text-primary mb-4 mx-auto" />,
+      title: "Explore Destinations",
+      description: "Discover curated travel spots from around the globe, from hidden gems to popular landmarks.",
+    },
+    {
+      icon: <Users className="h-10 w-10 text-primary mb-4 mx-auto" />,
+      title: "Find Travel Buddies",
+      description: "Connect with like-minded travelers who share your interests and are heading to the same places.",
+    },
+    {
+      icon: <Sparkles className="h-10 w-10 text-primary mb-4 mx-auto" />,
+      title: "AI-Powered Suggestions",
+      description: "Get personalized travel recommendations from our smart AI assistant based on your unique preferences.",
+    },
+  ];
+
+  return (
+    <section id="featured-section" className="bg-background py-16 sm:py-24">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold font-headline">Why Choose TripWripp?</h2>
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+            We provide everything you need to plan your next adventure, all in one place.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <div key={index} className="text-center p-8 bg-card rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+              {feature.icon}
+              <h3 className="text-xl font-semibold font-headline mb-2">{feature.title}</h3>
+              <p className="text-muted-foreground">{feature.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -55,6 +97,7 @@ function HomeContent() {
   return (
     <>
       <HeroSection />
+      <FeaturedSection />
       <main id="main-content" className="flex-grow container mx-auto p-4 py-8">
         <Tabs defaultValue={tab} value={tab} onValueChange={handleTabChange} className="w-full">
           <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 h-auto mb-8">
