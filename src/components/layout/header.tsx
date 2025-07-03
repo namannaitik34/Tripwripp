@@ -18,7 +18,7 @@ export function Header() {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center">
           <Link href="/" className="flex items-center gap-2 text-2xl font-bold">
-            <img src="https://i.ibb.co/7trJccNS/58f1a629-2357-4415-a908-f7a1cadac9fe.png" alt="TripWripp Logo" className="h-8 md:h-10 w-auto" />
+            <img src="http://i.ibb.co/7trJccNS/58f1a629-2357-4415-a908-f7a1cadac9fe.png" width={200} />
           </Link>
         </div>
         

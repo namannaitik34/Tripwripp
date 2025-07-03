@@ -9,7 +9,7 @@ const Footer = () => {
         {/* Logo and Description Section */}
         <div className="col-span-full md:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
           <Link href="/" className="flex items-center gap-2 text-2xl font-bold mb-4">
-            <img src="https://i.ibb.co/7trJccNS/58f1a629-2357-4415-a908-f7a1cadac9fe.png" alt="TripWripp Logo" className="h-10 w-auto" />
+            <img src="https://i.ibb.co/cc0fWCDS/Trip-Wripp-Brand-Kit.png" alt="TripWripp Logo" width={200} />
           </Link>
           <p className="text-background/80 text-sm mb-4">
             Explore the world with us. Your next adventure awaits.
