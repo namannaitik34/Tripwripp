@@ -29,22 +29,22 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="/?tab=destinations" className="text-background hover:text-accent transition-colors" scroll={false}>
+              <Link href="/destinations" className="text-background hover:text-accent transition-colors">
                 Destinations
               </Link>
             </li>
             <li>
-              <Link href="/?tab=packages" className="text-background hover:text-accent transition-colors" scroll={false}>
+              <Link href="/packages" className="text-background hover:text-accent transition-colors">
                 Packages
               </Link>
             </li>
             <li>
-              <Link href="/?tab=buddy_finder" className="text-background hover:text-accent transition-colors" scroll={false}>
+              <Link href="/buddy-finder" className="text-background hover:text-accent transition-colors">
                 Travel Buddy
               </Link>
             </li>
             <li>
-              <Link href="/?tab=ai_assistant" className="text-background hover:text-accent transition-colors" scroll={false}>
+              <Link href="/ai-assistant" className="text-background hover:text-accent transition-colors">
                 AI Assistant
               </Link>
             </li>

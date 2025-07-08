@@ -6,10 +6,10 @@ import { AuthButton } from "../auth/auth-button";
 
 export function Header() {
   const navLinks = [
-    { href: '/?tab=destinations', label: 'Destinations' },
-    { href: '/?tab=packages', label: 'Packages' },
-    { href: '/?tab=buddy_finder', label: 'Travel Buddy' },
-    { href: '/?tab=ai_assistant', label: 'AI Assistant' },
+    { href: '/destinations', label: 'Destinations' },
+    { href: '/packages', label: 'Packages' },
+    { href: '/buddy-finder', label: 'Travel Buddy' },
+    { href: '/ai-assistant', label: 'AI Assistant' },
     { href: '/scroll', label: 'Scroll' },
   ];
 
@@ -24,7 +24,7 @@ export function Header() {
         
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
          {navLinks.map(link => (
-         <Link key={link.label} href={link.href} className="text-foreground hover:text-primary transition-colors" scroll={false}>
+         <Link key={link.label} href={link.href} className="text-foreground hover:text-primary transition-colors">
          {link.label}
          </Link>
          ))}
@@ -51,7 +51,7 @@ export function Header() {
                   </SheetHeader>
                   <nav className="flex flex-col gap-6 mt-8">
                     {navLinks.map(link => (
-                      <Link key={link.label} href={link.href} className="text-foreground hover:text-primary transition-colors" scroll={false}>
+                      <Link key={link.label} href={link.href} className="text-foreground hover:text-primary transition-colors">
                         {link.label}
                       </Link>
                     ))}
