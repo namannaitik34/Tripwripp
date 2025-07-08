@@ -45,7 +45,7 @@ export function PostCard({ post }: PostCardProps) {
   const isLiked = user ? optimisticPost.likedBy.includes(user.uid) : false;
 
   return (
-    <Card className="w-full max-w-2xl mx-auto overflow-hidden shadow-lg border">
+    <Card className="w-full max-w-lg mx-auto overflow-hidden shadow-lg border">
       <CardHeader>
         <div className="flex items-center space-x-4">
           <Avatar>

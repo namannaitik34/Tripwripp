@@ -24,7 +24,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { CalendarIcon, Filter, Users, Search } from "lucide-react";
@@ -86,7 +86,7 @@ export function TravelBuddyFinder() {
       <h2 className="text-3xl font-headline font-semibold tracking-tight text-center flex items-center justify-center gap-2">
         <Users className="h-8 w-8 text-primary" /> Find Your Travel Buddy
       </h2>
-      <Card className="shadow-lg">
+      <Card className="shadow-lg max-w-3xl mx-auto">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-xl font-headline"><Filter className="h-5 w-5 text-primary" /> Search Filters</CardTitle>
         </CardHeader>
@@ -235,7 +235,7 @@ export function TravelBuddyFinder() {
       {!isSearching && searchResults.length > 0 && (
         <div className="space-y-6 mt-8">
           <h3 className="text-2xl font-headline font-semibold tracking-tight text-center">Matching Profiles</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {searchResults.map(profile => (
               <Card key={profile.id} className="hover:shadow-lg transition-shadow">
                 <CardHeader className="items-center text-center">

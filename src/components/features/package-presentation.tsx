@@ -18,7 +18,7 @@ export function PackagePresentation() {
   return (
     <div className="space-y-8">
       <h2 className="text-3xl font-headline font-semibold tracking-tight text-center">Featured Packages</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
         {mockPackages.map((pkg) => (
           <Card key={pkg.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300 ease-in-out flex flex-col">
             <CardHeader className="p-0">

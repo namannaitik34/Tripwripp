@@ -89,7 +89,7 @@ export function AiDestinationAssistant() {
       <h2 className="text-3xl font-headline font-semibold tracking-tight text-center flex items-center justify-center gap-2">
         <Sparkles className="h-8 w-8 text-primary" /> AI Destination Assistant
       </h2>
-      <Card className="max-w-2xl mx-auto shadow-lg">
+      <Card className="max-w-xl mx-auto shadow-lg">
         <CardHeader>
           <CardTitle className="font-headline">Tell us your preferences</CardTitle>
           <CardDescription>Our AI will suggest tailored destinations based on your travel style.</CardDescription>
@@ -192,7 +192,7 @@ export function AiDestinationAssistant() {
       </Card>
 
       {suggestions && suggestions.destinations.length > 0 && (
-        <Card className="max-w-2xl mx-auto mt-8 shadow-lg">
+        <Card className="max-w-xl mx-auto mt-8 shadow-lg">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 font-headline">
               <Lightbulb className="h-6 w-6 text-primary" />
